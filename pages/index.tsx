@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
 export const Home = (): JSX.Element => (
   <div className="container">
@@ -9,20 +9,16 @@ export const Home = (): JSX.Element => (
 
     <main>
       <h1 className="title">
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
+        Welcome to
+        {' '}
+        <a href="https://nextjs.org">Next.js!</a>
       </h1>
 
       <p className="description">
-        Get started by editing <code>pages/index.tsx</code>
+        Get started by editing
+        {' '}
+        <code>pages/index.tsx</code>
       </p>
-
-      <button
-        onClick={() => {
-          window.alert('With typescript and Jest')
-        }}
-      >
-        Test Button
-      </button>
 
       <div className="grid">
         <a href="https://nextjs.org/docs" className="card">
@@ -59,11 +55,14 @@ export const Home = (): JSX.Element => (
         target="_blank"
         rel="noopener noreferrer"
       >
-        Powered by <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
+        Powered by
+        {' '}
+        <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
       </a>
     </footer>
 
-    <style jsx>{`
+    <style jsx>
+      {`
       .container {
         min-height: 100vh;
         padding: 0 0.5rem;
@@ -192,9 +191,12 @@ export const Home = (): JSX.Element => (
           flex-direction: column;
         }
       }
-    `}</style>
+    `}
 
-    <style jsx global>{`
+    </style>
+
+    <style jsx global>
+      {`
       html,
       body {
         padding: 0;
@@ -206,8 +208,10 @@ export const Home = (): JSX.Element => (
       * {
         box-sizing: border-box;
       }
-    `}</style>
-  </div>
-)
+    `}
 
-export default Home
+    </style>
+  </div>
+);
+
+export default Home;
