@@ -1,3 +1,8 @@
+import { loadEnvConfig } from '@next/env';
+import { resolve } from 'path';
+
+loadEnvConfig(resolve(__dirname, '..'), process.env.NODE_ENV !== 'production');
+
 /**
  * Returns the string value of an environment variable, or a default value
  * if the variable is undefined.
@@ -48,21 +53,20 @@ export function envBoolean(name: string, fallback: boolean): boolean {
   return fallback;
 }
 
-/**
- * Database configuration is resolved from environment variables, falling back
- * to a default when an environment variable isn't set.
- */
 export const databaseConfig = {
-  database: envString('RDS_DATABASE', 'unify_poc_01'),
+  database: envString('RDS_DATABASE', 'unify_poc_02'),
   host: envString('RDS_HOST', '127.0.0.1'),
   password: envString('RDS_PASSWORD', 'tailwind'),
-  poolMin: envNumber('RDS_POOL_MIN', 2),
-  poolMax: envNumber('RDS_POOL_MAX', 10),
   port: envNumber('RDS_PORT', 3306),
   user: envString('RDS_USERNAME', 'root'),
+  pool: {
+    min: envNumber('RDS_POOL_MIN', 2),
+    max: envNumber('RDS_POOL_MAX', 10),
+  },
 };
 
 export const appConfig = {
+  env: envString('NODE_ENV', 'development'),
   baseUrl: envString('BASE_URL', 'http://localhost'),
   jwtSecret: envString('JWT_SECRET', 'Configure Locally'),
   jwtExpiration: envNumber('JWT_EXPIRATION', 1000 * 60 * 5), // 5 minutes

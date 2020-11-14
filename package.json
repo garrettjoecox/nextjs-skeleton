@@ -7,9 +7,13 @@
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
-    "lint": "eslint . --ext ts --ext tsx --ext js"
+    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "knex": "TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' knex"
   },
   "dependencies": {
+    "@next/env": "^10.0.1",
+    "knex": "^0.21.12",
+    "mysql2": "^2.2.5",
     "next": "^10.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
@@ -25,6 +29,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.1.2",
+    "ts-node": "^9.0.0",
     "typescript": "^3.8.3"
   }
 }
