@@ -68,7 +68,13 @@ export const databaseConfig = {
 export const appConfig = {
   env: envString('NODE_ENV', 'development'),
   baseUrl: envString('BASE_URL', 'http://localhost'),
+  cookieSigningKey: envString('COOKIE_SIGNING_KEY', 'Configure Locally'),
   jwtSecret: envString('JWT_SECRET', 'Configure Locally'),
   jwtExpiration: envNumber('JWT_EXPIRATION', 1000 * 60 * 5), // 5 minutes
   exposeErrors: envBoolean('EXPOSE_ERRORS', false),
+};
+
+export const logConfig: { [category: string]: string } = {
+  default: envString('LOG_LEVEL', 'info'),
+  Database: envString('DB_LOG_LEVEL', 'silent'),
 };

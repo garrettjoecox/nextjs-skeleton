@@ -1,10 +1,5 @@
 import * as Knex from 'knex';
-
-export enum UserStatus {
-  PENDING = 'PENDING',
-  ACTIVE = 'ACTIVE',
-  DISABLED = 'DISABLED',
-}
+import { UserStatus } from '../../domains/user/types';
 
 export async function up(knex: Knex) {
   await knex.schema.createTable('user', (table) => {
