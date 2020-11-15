@@ -1,0 +1,8 @@
+.landingContainer {
+  height: 100%;
+}
+
+.landingCard {
+  width: 400px;
+  max-width: 100vw;
+}
