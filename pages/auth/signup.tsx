@@ -1,14 +1,40 @@
 import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Alert, Button, Card, Form, Input, Row } from 'antd';
 import axios from 'axios';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { v4 as uuid } from 'uuid';
+import isAuth from '../../backend/middleware/isAuth';
+import { ExtendedNextApiRequest, ExtendedNextApiResponse } from '../../backend/types/NextApi';
 import useAsync from '../../frontend/hooks/useAsync';
 import styles from '../../frontend/styles/landing.module.css';
 
 // eslint-disable-next-line
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
+  try {
+    const req = context.req as ExtendedNextApiRequest;
+    const res = context.res as ExtendedNextApiResponse;
+    req.context = {
+      requestId: uuid(),
+    };
+    await isAuth(req, res);
+
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {},
+    };
+  }
+};
 
 export default function Signup() {
   const router = useRouter();

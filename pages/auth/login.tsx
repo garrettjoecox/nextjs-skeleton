@@ -1,11 +1,37 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Alert, Button, Card, Checkbox, Form, Input, Row } from 'antd';
 import axios from 'axios';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { v4 as uuid } from 'uuid';
+import isAuth from '../../backend/middleware/isAuth';
+import { ExtendedNextApiRequest, ExtendedNextApiResponse } from '../../backend/types/NextApi';
 import useAsync from '../../frontend/hooks/useAsync';
 import styles from '../../frontend/styles/landing.module.css';
+
+export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
+  try {
+    const req = context.req as ExtendedNextApiRequest;
+    const res = context.res as ExtendedNextApiResponse;
+    req.context = {
+      requestId: uuid(),
+    };
+    await isAuth(req, res);
+
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {},
+    };
+  }
+};
 
 export default function Login() {
   const router = useRouter();
